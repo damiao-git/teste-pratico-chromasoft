@@ -1,0 +1,77 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container{
+    background-color: antiquewhite;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    background-color: white;
+    border: 1px solid;
+    max-width: 1000px;
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+    padding: 10px;
+}
+.superior{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+}
+.filtro{
+    display: flex;
+    margin-bottom: 20px;
+
+    form{
+        display: grid;
+        gap: 20px;
+    }
+}
+.btn{
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #5c5858;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 35px;
+}
+.btn:hover{
+    background-color: #444444;
+}
+.caixa-itens{
+    display: flex;
+    gap: 20px;
+    align-items: end;
+    /* background-color: blanchedalmond; */
+}
+.item input{
+    /* background-color: red; */
+    height: 35px;
+    width: 240px;
+    border: none;
+    border-radius: 4px;
+    border: solid 1px #444444;
+}
+.btn-adicionar{
+    background-color: #1f1e1e;
+}
+.input{
+    padding: 0 15px;
+}
+.item{
+    display: grid;
+    gap: 4px;
+}

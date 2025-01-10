@@ -19,17 +19,20 @@
                         <h2 class="titulo">Filtro</h2>
 
                         <div class="caixa-itens">
-                            <div class="item">
-                                <label for="nome">Nome:</label>
-                                <input type="text" id="nome" name="nome">
+                            <div class="campos">
+                                <div class="item">
+                                    <label for="nome">Nome:</label>
+                                    <input type="text" id="nome" name="nome" autocomplete="off">
+                                </div>
+                                <div class="item">
+                                    <label for="nome">E-Mail:</label>
+                                    <input type="text" id="nome" name="nome" autocomplete="off">
+                                </div>
                             </div>
-                            <div class="item">
-                                <label for="nome">email:</label>
-                                <input type="text" id="nome" name="nome">
+                            <div class="botoes">
+                                <button class="btn">Buscar</button>
+                                <button class="btn btn-adicionar">Novo Usuário</button>
                             </div>
-
-                            <button class="btn">Buscar</button>
-                            <button class="btn btn-adicionar">Cadastrar</button>
 
                         </div>
 
@@ -47,7 +50,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($usuarios as $usuario)
+                        {{-- @foreach ($usuarios as $usuario)
                             <tr>
                                 <td>{{ $usuario->nome }}</td>
                                 <td>{{ $usuario->email }}</td>
@@ -56,7 +59,49 @@
                                     <button>Excluir</button>
                                 </td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
+                        <tr>
+                            <td>teste1</td>
+                            <td>teste1@gmail.com</td>
+                            <td><button class="btn-editar">Editar</button>
+                                <button class="btn-excluir">Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>teste1</td>
+                            <td>teste1@gmail.com</td>
+                            <td><button>Editar</button>
+                                <button>Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>teste1</td>
+                            <td>teste1@gmail.com</td>
+                            <td><button>Editar</button>
+                                <button>Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>teste1</td>
+                            <td>teste1@gmail.com</td>
+                            <td><button>Editar</button>
+                                <button>Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>teste1</td>
+                            <td>teste1@gmail.com</td>
+                            <td><button>Editar</button>
+                                <button>Excluir</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>teste1</td>
+                            <td>teste1@gmail.com</td>
+                            <td><button>Editar</button>
+                                <button>Excluir</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

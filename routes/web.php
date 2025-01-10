@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::any('/index', [UsuarioController::class, 'index'])->name('usuario.index');
+Route::any('/', [UsuarioController::class, 'index'])->name('usuario.index');
 Route::get('/criar', [UsuarioController::class, 'create'])->name('usuario.create');
 Route::get('/editar', [UsuarioController::class, 'edit'])->name('usuario.edit');
 Route::post('/criar', [UsuarioController::class, 'store'])->name('usuario.store');

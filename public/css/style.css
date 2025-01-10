@@ -1,10 +1,11 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-.container{
+
+.container {
     background-color: antiquewhite;
     width: 100vw;
     height: 100vh;
@@ -12,7 +13,8 @@
     align-items: center;
     justify-content: center;
 }
-.card{
+
+.card {
     background-color: white;
     border: 1px solid;
     max-width: 1000px;
@@ -21,22 +23,39 @@
     margin: 10px;
     padding: 10px;
 }
-.superior{
+
+.superior {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
 }
-.filtro{
+
+.filtro {
     display: flex;
     margin-bottom: 20px;
+    width: 100%;
 
-    form{
+    form {
+        width: 100%;
         display: grid;
         gap: 20px;
     }
 }
-.btn{
+
+.campos {
+    display: flex;
+    gap: 10px;
+}
+
+.botoes {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.btn {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -48,30 +67,177 @@
     font-family: Arial, Helvetica, sans-serif;
     height: 35px;
 }
-.btn:hover{
+
+.btn:hover {
     background-color: #444444;
 }
-.caixa-itens{
+
+.caixa-itens {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     align-items: end;
+    justify-content: space-between;
     /* background-color: blanchedalmond; */
 }
-.item input{
+
+.item input {
     /* background-color: red; */
     height: 35px;
-    width: 240px;
+    width: 300px;
     border: none;
     border-radius: 4px;
     border: solid 1px #444444;
 }
-.btn-adicionar{
+
+.btn-adicionar {
     background-color: #1f1e1e;
 }
-.input{
+
+.input {
     padding: 0 15px;
 }
-.item{
+
+.item {
     display: grid;
     gap: 4px;
+}
+
+.tabela {
+    max-width: 960px;
+    width: 100%;
+    margin: 20px auto;
+    height: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+    thead {
+        background-color: #444444;
+        color: white;
+        font-weight: 600;
+        height: 35px;
+
+        tr {
+
+            td {
+                padding-left: 10px;
+            }
+
+            td:first-child {
+                max-width: 40%;
+                width: 100%;
+            }
+
+            td:nth-child(2) {
+                max-width: 30%;
+                width: 100%;
+            }
+
+            td:nth-child(3) {
+                max-width: 30%;
+                width: 100%;
+            }
+        }
+
+
+
+    }
+
+    tbody {
+        background-color: #cccccc;
+        font-size: 17px;
+
+        tr {
+            height: 40px;
+
+            td {
+                padding-left: 10px;
+            }
+
+        }
+
+        tr:hover {
+            background-color: #afafaf;
+
+        }
+
+        button {
+            width: 75px;
+            height: 32px;
+            float: right;
+            padding: 9px 20px;
+            margin: 0px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-editar {
+            background-color: #8280ff;
+            color: white;
+        }
+
+        .btn-editar:hover {
+            background-color: #5654ff;
+            color: white;
+        }
+
+        .btn-excluir {
+            background-color: #ff7171;
+            color: white;
+        }
+
+        .btn-excluir:hover {
+            background-color: #ff4747;
+            color: white;
+        }
+
+    }
+}
+
+@media(max-width:860px) {
+
+    .caixa-itens {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .campos {
+        justify-content: center;
+    }
+
+    .botoes {
+        justify-content: normal;
+    }
+}
+
+@media(max-width:730px) {
+
+    tbody {
+        tr {
+            td:nth-child(3) {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                button {
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+}
+
+@media(max-width:640px) {
+    .campos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+    }
+    .item input{
+        width: 100%;
+    }
 }

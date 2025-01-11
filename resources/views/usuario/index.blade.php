@@ -17,22 +17,23 @@
             <div class="superior">
 
                 <div class="filtro">
-                    <form action="#">
+                    <form action="/" method="GET">
                         <h2 class="titulo">Filtro</h2>
 
                         <div class="caixa-itens">
                             <div class="campos">
                                 <div class="item">
                                     <label for="nome">Nome:</label>
-                                    <input type="text" id="nome" name="nome" autocomplete="off">
+                                    <input type="text" id="nome" name="nome" value="@if(isset($dados['nome'])) {{$dados['nome']}} @endif" autocomplete="off">
                                 </div>
                                 <div class="item">
                                     <label for="email">E-Mail:</label>
-                                    <input type="text" id="email" name="email" autocomplete="off">
+                                    <input type="text" id="email" name="email" value="@if(isset($dados['email'])) {{$dados['email']}} @endif" autocomplete="off">
                                 </div>
                             </div>
                             <div class="botoes">
-                                <button class="btn">Buscar</button>
+                                <a href="/" class="btn">Limpar</a>
+                                <button type="submit" class="btn">Buscar</button>
                                 <a href="#" id="botao_novo" class="btn btn-adicionar">Novo Usuário</a>
                             </div>
 

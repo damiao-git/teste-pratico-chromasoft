@@ -57,6 +57,7 @@
 }
 
 .btn {
+    text-decoration: none;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
@@ -204,10 +205,11 @@ table {
     }
 }
 .acoes{
+    padding: 2px 0px;
     display: flex;
     float: right;
 }
-@media(max-width:892px) {
+@media(max-width:1000px) {
 
     .caixa-itens {
         align-items: start;

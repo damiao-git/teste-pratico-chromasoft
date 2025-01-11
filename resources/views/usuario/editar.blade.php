@@ -16,7 +16,7 @@
                 </div>
                 <div class="item-criar">
                     <label for="email_criar">E-Mail:</label>
-                    <input type="text" id="email_editar" name="email_editar" autocomplete="off">
+                    <input type="email" id="email_editar" name="email_editar" autocomplete="off">
                 </div>
                 <div class="item-criar">
                     <label for="senha_criar">Senha:</label>

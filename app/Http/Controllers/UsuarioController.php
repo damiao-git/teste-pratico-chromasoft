@@ -11,10 +11,11 @@ class UsuarioController extends Controller
 
     public function index(Request $request)
     {
+        // dd($request->all());
         $dados = $request->all();
 
         $usuarios = $this->filtro($request);
-        return view('usuario.index', compact('usuarios'));
+        return view('usuario.index', compact('usuarios', 'dados'));
     }
 
     public function filtro($request)
@@ -25,7 +26,7 @@ class UsuarioController extends Controller
                     $query->where('nome', 'LIKE', "%{$request->nome}%");
                 }
                 if ($request->email) {
-                    $query->where('email', 'LIKE', "%{$request->nome}%");
+                    $query->where('email', 'LIKE', "%{$request->email}%");
                 }
             }
         })->get();

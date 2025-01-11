@@ -1,0 +1,58 @@
+dialog{
+    margin: auto;
+    max-width: 500px;
+    width: 100%;
+    max-height: 460px;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+
+}
+
+dialog::backdrop{
+    background-color: rgba(0, 0, 0, 0.486);
+}
+dialog form{
+    max-width: 460px;
+    width: 100%;
+    max-height: 340px;
+    height: 100%;
+    margin: 10px auto;
+}
+.cabecalho-modal{
+    display: flex;
+    justify-content: space-between;
+}
+.cabecalho-modal img{
+    width: 30px;
+    cursor: pointer;
+}
+dialog .titulo-criar{
+    padding: 10px;
+}
+.caixa-itens-criar{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.campos-criar{
+    max-width: 460px;
+    width: 100%;
+    margin: 20px auto;
+}
+.item-criar{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+}
+.item-criar input{
+    height: 40px;
+    border:1px solid;
+    border-radius: 4px;
+}
+.botoes-criar{
+    /* background-color: red; */
+    padding-left: 10px;
+}

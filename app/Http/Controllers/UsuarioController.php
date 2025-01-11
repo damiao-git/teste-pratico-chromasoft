@@ -22,10 +22,10 @@ class UsuarioController extends Controller
         $usuarios = Usuario::where(function ($query) use ($request) {
             if ($request) {
                 if ($request->nome) {
-                    $query->where('usuario.nome', 'LIKE', "%{$request->nome}%");
+                    $query->where('nome', 'LIKE', "%{$request->nome}%");
                 }
                 if ($request->email) {
-                    $query->where('usuario.email', 'LIKE', "%{$request->nome}%");
+                    $query->where('email', 'LIKE', "%{$request->nome}%");
                 }
             }
         })->get();

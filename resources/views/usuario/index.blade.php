@@ -45,6 +45,11 @@
             <hr>
             <div class="tabela">
                 <table>
+                    @if(sizeof($usuarios) == 0)
+                    <tr>
+                        <p>Nenhum usuário encontrado</p>
+                    </tr>
+                    @else
                     <thead>
                         <tr>
                             <td>Nome</td>
@@ -64,8 +69,8 @@
                                 </td>
                             </tr>
                         @endforeach
-
                     </tbody>
+                    @endif
                 </table>
             </div>
         </div>

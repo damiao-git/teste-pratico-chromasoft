@@ -72,21 +72,39 @@
             })
             .then(response => response.json())
             .then(data => {
-                modal_criar.close();
-                Swal.fire({
-                    title: "Sucesso!",
-                    text: "Usuário criado com sucesso!",
-                    icon: "success"
-                }).then(() => {
-                    window.location.reload();
-                })
-            }).catch(error => {
+                if (data.success) {
+                    modal_criar.close();
+                    Swal.fire({
+                        title: "Sucesso!",
+                        text: "Usuário criado com sucesso!",
+                        icon: "success"
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                } else {
+                    modal_criar.close();
+                    let errorMessages = "";
+                    for (let campo in data.message) {
+                        data.message[campo].forEach(error => {
+                            errorMessages += `<p>${error}</p>`;
+                        });
+                    }
+                    Swal.fire({
+                        title: "Erro!",
+                        html: errorMessages,
+                        icon: "error"
+                    }).then(() => {
+                        modal_criar.showModal();
+                    });
+                }
+            })
+            .catch(error => {
                 modal_criar.close();
                 Swal.fire({
                     title: "Erro!",
-                    text: "Erro ao criar usuário!",
+                    text: "Erro ao processar a solicitação.",
                     icon: "error"
-                })
+                });
             });
     }
 
@@ -108,29 +126,27 @@
         var senha = document.querySelector("#senha_editar").value;
         var csrfToken = document.querySelector('input[name="_token"]').value;
 
-        if (nome == '') {
+        if (!nome) {
             modal_criar.close();
             Swal.fire({
                 title: "Erro!",
                 text: "Preencha o campo nome!",
                 icon: "error"
-            }).then(() => {
-                modal_criar.showModal();
-            })
-            return false;
+            }).then(() => modal_criar.showModal());
+            return;
         }
-        if (email == '') {
+
+        if (!email) {
             modal_criar.close();
             Swal.fire({
                 title: "Erro!",
                 text: "Preencha o campo email!",
                 icon: "error"
-            }).then(() => {
-                modal_criar.showModal();
-            })
-            return false;
+            }).then(() => modal_criar.showModal());
+            return;
         }
-        if (senha == '') {
+
+        if (!senha) {
             modal_editar.close();
             Swal.fire({
                 title: "Deseja manter a senha antiga?",
@@ -142,47 +158,24 @@
                     modal_editar.showModal();
                     return;
                 }
-
-                var dados = {
-                    'nome': nome,
-                    'email': email,
-                    'senha': senha,
-                }
-
-                fetch(`/update/${id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': csrfToken
-                        },
-                        body: JSON.stringify(dados)
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        modal_editar.close();
-                        Swal.fire({
-                            title: "Sucesso!",
-                            text: "Usuário editado com sucesso!",
-                            icon: "success"
-                        }).then(() => {
-                            window.location.reload();
-                        })
-                    }).catch(error => {
-                        modal_editar.close();
-                        Swal.fire({
-                            title: "Erro!",
-                            text: "Erro ao editar usuário!",
-                            icon: "error"
-                        })
-                    });
+                // Envia a requisição sem senha
+                enviarRequisicao(id, nome, email, csrfToken);
             });
             return;
         }
 
+        // Envia a requisição com a senha
+        enviarRequisicao(id, nome, email, csrfToken, senha);
+    }
+
+    function enviarRequisicao(id, nome, email, csrfToken, senha = null) {
         var dados = {
             'nome': nome,
-            'email': email,
-            'senha': senha,
+            'email': email
+        };
+
+        if (senha) {
+            dados['senha'] = senha;
         }
 
         fetch(`/update/${id}`, {
@@ -196,24 +189,40 @@
             .then(response => response.json())
             .then(data => {
                 modal_editar.close();
-                Swal.fire({
-                    title: "Sucesso!",
-                    text: "Usuário editado com sucesso!",
-                    icon: "success"
-                }).then(() => {
-                    window.location.reload();
-                })
-            }).catch(error => {
+                if (data.success) {
+                    Swal.fire({
+                        title: "Sucesso!",
+                        text: "Usuário editado com sucesso!",
+                        icon: "success"
+                    }).then(() => window.location.reload());
+                } else {
+                    let errorMessages = "";
+                    for (let campo in data.message) {
+                        data.message[campo].forEach(error => {
+                            errorMessages += `<p>${error}</p>`;
+                        });
+                    }
+                    Swal.fire({
+                        title: "Erro!",
+                        html: errorMessages,
+                        icon: "error"
+                    }).then(()=>{
+                        modal_editar.showModal();
+                    });
+                }
+            })
+            .catch(() => {
                 modal_editar.close();
                 Swal.fire({
                     title: "Erro!",
                     text: "Erro ao editar usuário!",
                     icon: "error"
-                })
+                });
             });
     }
 
-    function excluir(id){
+
+    function excluir(id) {
         Swal.fire({
             title: 'Você tem certeza?',
             text: "Isso não pode ser desfeito!",
@@ -224,29 +233,30 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 fetch(`/excluir/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    Swal.fire({
-                        title: 'Excluído!',
-                        text: data.message,
-                        icon: 'success'
-                    }).then(() => {
-                        window.location.reload();
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        Swal.fire({
+                            title: 'Excluído!',
+                            text: data.message,
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.reload();
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Erro!',
+                            text: 'Erro ao excluir o usuário.',
+                            icon: 'error'
+                        });
                     });
-                })
-                .catch(error => {
-                    Swal.fire({
-                        title: 'Erro!',
-                        text: 'Erro ao excluir o usuário.',
-                        icon: 'error'
-                    });
-                });
             }
         });
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UsuarioValidator;
 use App\Models\Usuario;
 use Hash;
 use Illuminate\Http\Request;
@@ -11,7 +12,6 @@ class UsuarioController extends Controller
 
     public function index(Request $request)
     {
-        // dd($request->all());
         $dados = $request->all();
 
         $usuarios = $this->filtro($request);
@@ -43,7 +43,16 @@ class UsuarioController extends Controller
     {
         $mensagem = new MensagemController;
         try {
-
+            $request->validate([
+                "nome" => "required|min:3|max:100",
+                "email" => "required|min:3|max:100|email|unique:usuarios,email",
+            ], [
+                "required" => "O campo :attribute é obrigatório!",
+                "min" => "O campo :attribute precisa conter no minimo 3 caracteres!",
+                "max" => "O campo :attribute precisa conter no maximo 100 caracteres!",
+                "email.email" => "Digite um email válido!",
+                "email.unique" => "Email já cadastrado no banco de dados"
+            ]);
             $data = [
                 'nome' => $request->nome,
                 'email' => $request->email,
@@ -54,6 +63,8 @@ class UsuarioController extends Controller
 
             return $mensagem->sucessoStore($usuario_id);
 
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return $mensagem->mensagemErro($e->errors());
         } catch (\Exception $e) {
             return $mensagem->mensagemErro($e->getMessage());
         }
@@ -63,22 +74,37 @@ class UsuarioController extends Controller
     {
         try {
             $mensagem = new MensagemController;
-            $usuario = Usuario::find($id);
-            if($usuario->senha){
-                $usuario->update([
-                    'nome' => $request->nome,
-                    'email' => $request->email,
-                    'senha' => Hash::make($request->senha),
-                ]);
-            }else{
-                $usuario->update([
-                    'nome' => $request->nome,
-                    'email' => $request->email
-                ]);
+            $id = $request->id; // Supondo que o ID vem no request
 
+            $request->validate([
+                "nome" => "required|min:3|max:100",
+                "email" => "required|min:3|max:100|email|unique:usuarios,email," . $id,
+            ], [
+                "required" => "O campo :attribute é obrigatório!",
+                "min" => "O campo :attribute precisa conter no minimo 3 caracteres!",
+                "max" => "O campo :attribute precisa conter no maximo 100 caracteres!",
+                "email.email" => "Digite um email válido!",
+                "email.unique" => "Email já cadastrado no banco de dados"
+            ]);
+
+            $data = [
+                'nome' => $request->nome,
+                'email' => $request->email,
+            ];
+
+            // Se a senha foi enviada, atualiza com a nova senha
+            if ($request->filled('senha')) {
+                $data['senha'] = Hash::make($request->senha);
             }
+
+            // Atualiza o usuário
+            $usuario = Usuario::findOrFail($id);
+            $usuario->update($data);
+
             return $mensagem->sucessoUpdate();
 
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return $mensagem->mensagemErro($e->errors());
         } catch (\Exception $e) {
             return $mensagem->mensagemErro($e->getMessage());
         }

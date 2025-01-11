@@ -158,13 +158,11 @@
                     modal_editar.showModal();
                     return;
                 }
-                // Envia a requisição sem senha
                 enviarRequisicao(id, nome, email, csrfToken);
             });
             return;
         }
 
-        // Envia a requisição com a senha
         enviarRequisicao(id, nome, email, csrfToken, senha);
     }
 

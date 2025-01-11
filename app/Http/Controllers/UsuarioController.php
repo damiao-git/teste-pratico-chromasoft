@@ -74,7 +74,6 @@ class UsuarioController extends Controller
     {
         try {
             $mensagem = new MensagemController;
-            $id = $request->id; // Supondo que o ID vem no request
 
             $request->validate([
                 "nome" => "required|min:3|max:100",
@@ -92,12 +91,10 @@ class UsuarioController extends Controller
                 'email' => $request->email,
             ];
 
-            // Se a senha foi enviada, atualiza com a nova senha
             if ($request->filled('senha')) {
                 $data['senha'] = Hash::make($request->senha);
             }
 
-            // Atualiza o usuário
             $usuario = Usuario::findOrFail($id);
             $usuario->update($data);
 
@@ -112,7 +109,6 @@ class UsuarioController extends Controller
 
     public function destroy($id)
     {
-        // dd($id);
         $mensagem = new MensagemController;
 
         try {

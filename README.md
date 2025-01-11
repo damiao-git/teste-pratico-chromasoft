@@ -3,7 +3,7 @@
 
 ## Descrição
 
-Este projeto foi desenvolvido como parte de um teste prático para a vaga de Desenvoledor FullStack Web. Ele consiste em uma aplicação web que Gerencia Usuários.
+Este projeto foi desenvolvido como parte de um teste prático para a vaga de Desenvoledor FullStack Web. Ele consiste em uma aplicação web que gerencia usuários.
 
 ## Funcionalidades
 
@@ -57,7 +57,7 @@ Antes de começar, certifique que tem as seguintes ferramentas na sua máquina:
 
 5. Execute as migrações
 
-```php artisan migrate```
+```php artisan migrate --seed```
 
 6. Inicie o servidor: 
 
@@ -71,4 +71,5 @@ Antes de começar, certifique que tem as seguintes ferramentas na sua máquina:
 
 - Gosto de usar o SweetAlert para mostrar as mensagens;
 - Criei uma classe de mensagens para agiliar as respostas para o front;
-- Tenho ais familiaridade com JQuery do que Javascript Puro;
+- Tenho mais familiaridade com JQuery do que Javascript Puro;
+- Seria interessante dar continuidade nesse crud e inserir Autentição e login com esses dados, mas não sei se daria tempo;

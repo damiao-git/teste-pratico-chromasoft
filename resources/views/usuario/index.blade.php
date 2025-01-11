@@ -8,6 +8,7 @@
     <title>Teste Pratico - Chromasoft</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dialog.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -58,7 +59,7 @@
                                 <td id="email_{{$usuario->id}}">{{ $usuario->email }}</td>
                                 <td class="acoes">
                                     <a href="#" class="btn-editar" onclick="abrirModalEditar({{$usuario->id}})">Editar</a>
-                                    <button class="btn-excluir">Excluir</button>
+                                    <button class="btn-excluir" onclick="excluir({{$usuario->id}})">Excluir</button>
                                 </td>
                             </tr>
                         @endforeach

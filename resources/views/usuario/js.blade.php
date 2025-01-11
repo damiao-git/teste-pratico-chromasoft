@@ -212,4 +212,42 @@
                 })
             });
     }
+
+    function excluir(id){
+        Swal.fire({
+            title: 'Você tem certeza?',
+            text: "Isso não pode ser desfeito!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/excluir/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.fire({
+                        title: 'Excluído!',
+                        text: data.message,
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.reload();
+                    });
+                })
+                .catch(error => {
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: 'Erro ao excluir o usuário.',
+                        icon: 'error'
+                    });
+                });
+            }
+        });
+    }
 </script>

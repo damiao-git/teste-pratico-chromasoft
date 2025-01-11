@@ -83,8 +83,9 @@ class UsuarioController extends Controller
         }
     }
 
-    public function destroy($id, Request $request)
+    public function destroy($id)
     {
+        // dd($id);
         $mensagem = new MensagemController;
 
         try {

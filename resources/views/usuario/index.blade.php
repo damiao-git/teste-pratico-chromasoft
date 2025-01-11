@@ -53,10 +53,11 @@
                     <tbody>
                         @foreach ($usuarios as $usuario)
                             <tr>
-                                <td>{{ $usuario->nome }}</td>
-                                <td>{{ $usuario->email }}</td>
-                                <td>
-                                    <button class="btn-editar">Editar</button>
+                                <input type="hidden" id="usuario_id" value="{{$usuario->id}}">
+                                <td id="nome_{{$usuario->id}}">{{ $usuario->nome }}</td>
+                                <td id="email_{{$usuario->id}}">{{ $usuario->email }}</td>
+                                <td class="acoes">
+                                    <a href="#" class="btn-editar" onclick="abrirModalEditar({{$usuario->id}})">Editar</a>
                                     <button class="btn-excluir">Excluir</button>
                                 </td>
                             </tr>
@@ -69,6 +70,7 @@
 
     </div>
     @include('usuario.criar')
+    @include('usuario.editar')
     @include('usuario.js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

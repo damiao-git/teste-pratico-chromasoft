@@ -21,7 +21,7 @@
     max-width: 1000px;
     width: 100%;
     height: 100%;
-    margin: 10px;
+    margin-top: 50px;
     padding: 10px;
 }
 
@@ -167,8 +167,6 @@ table {
         }
 
         button {
-            width: 75px;
-            height: 32px;
             float: right;
             padding: 9px 20px;
             margin: 0px 10px;
@@ -178,6 +176,11 @@ table {
         }
 
         .btn-editar {
+            margin: 0px 10px;
+            font-size: 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            padding: 9px 20px;
             background-color: #8280ff;
             color: white;
         }
@@ -188,6 +191,7 @@ table {
         }
 
         .btn-excluir {
+            font-size: 16px;
             background-color: #ff7171;
             color: white;
         }
@@ -199,7 +203,10 @@ table {
 
     }
 }
-
+.acoes{
+    display: flex;
+    float: right;
+}
 @media(max-width:892px) {
 
     .caixa-itens {
@@ -216,22 +223,6 @@ table {
     }
 }
 
-@media(max-width:730px) {
-
-    tbody {
-        tr {
-            td:nth-child(3) {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                button {
-                    margin-top: 5px;
-                }
-            }
-        }
-    }
-}
 
 @media(max-width:640px) {
     .campos {

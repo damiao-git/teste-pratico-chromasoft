@@ -60,17 +60,22 @@ class UsuarioController extends Controller
 
     public function update(Request $request, $id)
     {
-
         try {
             $mensagem = new MensagemController;
             $usuario = Usuario::find($id);
+            if($usuario->senha){
+                $usuario->update([
+                    'nome' => $request->nome,
+                    'email' => $request->email,
+                    'senha' => Hash::make($request->senha),
+                ]);
+            }else{
+                $usuario->update([
+                    'nome' => $request->nome,
+                    'email' => $request->email
+                ]);
 
-            $usuario->update([
-                'nome' => $request->nome,
-                'email' => $request->email,
-                'senha' => Hash::make($request->senha),
-            ]);
-
+            }
             return $mensagem->sucessoUpdate();
 
         } catch (\Exception $e) {
